@@ -25,6 +25,14 @@ router.delete('/:id', (req, res) => {
     .catch(err => res.status(404).json({success: false}))
 })
 
-// router.patch - updte todo as completd
+// router.patch - update todo as completed
+router.patch('/:id', (req, res) => {
+  item.updateOne(
+    {'_id': req.params.id},
+    {'completed': true}
+  )
+    .then(() => res.json({success: true}))
+    .catch(() => res.send('object not found with ID'))
+})
 
 module.exports = router;
